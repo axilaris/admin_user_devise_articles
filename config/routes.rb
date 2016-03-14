@@ -3,10 +3,25 @@ Rails.application.routes.draw do
   devise_for :admins
   devise_for :users
 
-  resources :users, only: [:index]
-  resources :admins, only: [:index]
 
-  resources :articles
+  namespace :admin do
+    authenticate :admin do
+      resources :articles, only: :index
+    end
+  end
+
+
+  namespace :user do
+    authenticate :user do
+      resources :articles, only: :index
+    end
+  end
+
+
+# resources :users, only: [:index]
+#  resources :admins, only: [:index]
+
+#  resources :articles
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
