@@ -5,6 +5,7 @@ To create User Admin devise model with Articles of polymorphic ownership example
 Goal is to create url of this sort:
 
 localhost/user/articles
+
 localhost/admin/articles
 
 <tt>rake doc:app</tt>.
