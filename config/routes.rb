@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  resources :articles
+
   devise_for :admins
   devise_for :users
 
   resources :users, only: [:index]
+  resources :admins, only: [:index]
+
+  resources :articles
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
