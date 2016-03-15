@@ -1,5 +1,28 @@
-<ul>
-  <% @articles.each do |article| %>
-    <li><%= article.post %></li>
-  <% end %>
-</ul>
+<%= current_user.id %>
+<%= current_user.email %>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Post</th>
+      <th>Person</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.post %></td>
+        <td><%= article.person_id %></td>
+        <td><%= link_to 'Show', [:user, article] %></td>
+        <td><%= link_to 'Edit', edit_user_article_path(article) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New User Article', new_user_article_path %>
+
+<%= link_to('Logout', destroy_user_session_path, :method => :delete) %> 
