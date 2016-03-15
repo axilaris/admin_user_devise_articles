@@ -1,5 +1,12 @@
+<%= current_admin.id %>
+<%= current_admin.email %>
+
 <ul> 
   <% @articles.each do |article| %>
     <li><%= article.post %></li> 
   <% end %>
 </ul>
+
+
+<%= link_to 'New Admin Article', new_admin_article_path %>
+

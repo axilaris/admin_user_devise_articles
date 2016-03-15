@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   namespace :admin do
     authenticate :admin do
       resources :dashboard, only: :index
-      resources :articles, only: :index
+      resources :articles
     end
   end
 
