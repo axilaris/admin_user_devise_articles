@@ -1,10 +1,8 @@
 class Admin::ArticlesController < ApplicationController
 	before_action :set_article, only: [:show, :edit, :update, :destroy]
   
-    def index
-      
+    def index      
       @articles = current_admin.articles
-      #@articles = Article.all
     end
   
 
