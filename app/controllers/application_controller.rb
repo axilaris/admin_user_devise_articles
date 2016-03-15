@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 	  if resource.is_a?(User)
 	    users_articles_path
 	  elsif resource.is_a?(Admin)
-	    admins_articles_path
+	    admins_dashboard_index_path
 	  end
 	end  
 
