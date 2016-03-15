@@ -16,15 +16,16 @@ class Admin::ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
 
+    @article.person_id = current_admin.id
     @article.person_type = "Admin"
 
     respond_to do |format|
       if @article.save
-        format.html { redirect_to @article, notice: 'Facility was successfully created.' }
- #       format.json { render :show, status: :created, location: @article }
+        format.html { redirect_to [:admin, @article], notice: 'Facility was successfully created.' }
+        format.json { render :show, status: :created, location: @article }
       else
         format.html { render :new }
-#        format.json { render json: @article.errors, status: :unprocessable_entity }
+        format.json { render json: @article.errors, status: :unprocessable_entity }
       end
     end
   end    
@@ -48,7 +49,7 @@ class Admin::ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update(article_params)
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
+        format.html { redirect_to [:admin, @article], notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
       else
         format.html { render :edit }
@@ -76,7 +77,7 @@ class Admin::ArticlesController < ApplicationController
     end
 
 
-    def facility_params
+    def article_params
       params.require(:article).permit(:post, :person_id, :person_type)
     end
 
