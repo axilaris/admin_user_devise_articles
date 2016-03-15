@@ -6,9 +6,9 @@ class ApplicationController < ActionController::Base
 
 	def after_sign_in_path_for(resource)
 	  if resource.is_a?(User)
-	    user_articles_path
+	    users_articles_path
 	  elsif resource.is_a?(Admin)
-	    admin_articles_path
+	    admins_dashboard_index_path
 	  end
 	end  
 

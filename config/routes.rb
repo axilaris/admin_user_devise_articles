@@ -4,14 +4,15 @@ Rails.application.routes.draw do
   devise_for :users
 
 
-  namespace :admin do
+  namespace :admins do
     authenticate :admin do
       resources :articles, only: :index
+      resources :dashboard, only: :index
     end
   end
 
 
-  namespace :user do
+  namespace :users do
     authenticate :user do
       resources :articles, only: :index
     end
