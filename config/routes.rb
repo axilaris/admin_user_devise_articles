@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     authenticate :admin do
+      resources :dashboard, only: :index
       resources :articles, only: :index
     end
   end
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
 
   namespace :user do
     authenticate :user do
+      resources :dashboard, only: :index
       resources :articles, only: :index
     end
   end
