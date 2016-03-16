@@ -8,4 +8,16 @@ localhost/user/articles
 
 localhost/admin/articles
 
+
+Using namespace to achieve this.
+
+
+Some help:
+
+https://github.com/plataformatec/devise
+For specific views for devise
+config.scoped_views = true inside the config/initializers/devise.rb
+rails generate devise:views users
+
+
 <tt>rake doc:app</tt>.
