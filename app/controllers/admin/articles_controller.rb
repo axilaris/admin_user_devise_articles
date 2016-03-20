@@ -4,9 +4,24 @@ class Admin::ArticlesController < ApplicationController
 	before_action :set_article, only: [:show, :edit, :update, :destroy]
   
 
+    def import
 
+    end  
+
+
+    # import excel
+    def import_action
+      @data = import_spreadsheet(params[:file])
+      
+      respond_to do |format|
+        format.html 
+        format.json { render json: @data }
+      end
+
+    end  
+
+    # export excel and allow user to download
     def export      
-      puts "XXX export start"
 
       p = Axlsx::Package.new
       wb = p.workbook
@@ -17,7 +32,6 @@ class Admin::ArticlesController < ApplicationController
         sheet.add_row ['     preserving whitespace']
       end      
 
-      puts "XXX export end"
       send_data p.to_stream.read, :filename => "export.xlsx"
 
     end 
@@ -99,5 +113,30 @@ class Admin::ArticlesController < ApplicationController
     def article_params
       params.require(:article).permit(:post, :person_id, :person_type)
     end
+
+    # import excel - open excel
+    def open_spreadsheet(file)
+      case File.extname(file.original_filename)
+        when ".xls" then Roo::Excel.new(file.path)
+        when ".xlsx" then Roo::Excelx.new(file.path)
+        else raise "Unknown file type: #{file.original_filename}"
+      end
+    end
+
+    # import excel - open excel and read contents
+    def import_spreadsheet(file)
+      spreadsheet = open_spreadsheet(file)
+
+      header = spreadsheet.row(1)
+      data = {x: header, columns: [], keys: []}
+      (2..spreadsheet.last_row).each do |i|
+        data[:columns] << spreadsheet.row(i)
+        data[:keys] << spreadsheet.row(i)[0]
+      end
+      return data
+
+
+    end
+
 
 end

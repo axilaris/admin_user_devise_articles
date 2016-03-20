@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     authenticate :admin do
       resources :dashboard, only: :index
       resources :articles do
-        collection do 
+        collection do
+          get 'import' => 'articles#import'
+          post 'import' => 'articles#import_action'
           get :export
         end
       end  

@@ -25,8 +25,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem "devise"
 
+#excel export
 gem 'rubyzip'
 gem 'axlsx'
+
+#excel import
+gem 'roo'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
