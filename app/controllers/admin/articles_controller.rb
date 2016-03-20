@@ -1,6 +1,27 @@
+require 'axlsx'
+
 class Admin::ArticlesController < ApplicationController
 	before_action :set_article, only: [:show, :edit, :update, :destroy]
   
+
+
+    def export      
+      puts "XXX export start"
+
+      p = Axlsx::Package.new
+      wb = p.workbook
+
+      wb.add_worksheet(:name => "Basic Worksheet") do |sheet|
+        sheet.add_row ["First Column", "Second", "Third"]
+        sheet.add_row [1, 2, 3]
+        sheet.add_row ['     preserving whitespace']
+      end      
+
+      puts "XXX export end"
+      send_data p.to_stream.read, :filename => "export.xlsx"
+
+    end 
+
     def index      
       @articles = current_admin.articles
     end

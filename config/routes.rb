@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   namespace :admin do
     authenticate :admin do
       resources :dashboard, only: :index
-      resources :articles
+      resources :articles do
+        collection do 
+          get :export
+        end
+      end  
     end
   end
 
